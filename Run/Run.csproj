@@ -11,6 +11,7 @@
     <UseWinUI>true</UseWinUI>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <UseWPF>False</UseWPF>
+    <UseWindowsForms>False</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="SettingsWindow.xaml" />

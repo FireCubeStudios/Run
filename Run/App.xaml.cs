@@ -72,9 +72,10 @@ namespace Run
         {
             m_window = new MainWindow();
             m_window.Activate();
+            KeyboardService.Initialize();
         }
 
-        private Window m_window;
+        public Window m_window;
 
 
         private static void OnUnobservedException(object sender, UnobservedTaskExceptionEventArgs e) => e.SetObserved();

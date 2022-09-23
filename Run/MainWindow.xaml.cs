@@ -42,7 +42,7 @@ namespace Run
 
         private void Focus(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow s_window = new SettingsWindow();
             s_window.Activate();

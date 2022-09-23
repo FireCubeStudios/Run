@@ -20,7 +20,6 @@ namespace Run.Services
 
         public SettingsService()
         {
-            Settings.Values["Hide"] = true;
             if (SystemInformation.Instance.IsFirstRun)
             {
                 Settings.Values["Hide"] = true;
