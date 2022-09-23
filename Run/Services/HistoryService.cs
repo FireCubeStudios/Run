@@ -12,7 +12,7 @@ namespace Run.Services
     public class HistoryService
     {
         ApplicationDataContainer Settings = ApplicationData.Current.LocalSettings;
-        public Queue<string> History = new();
+        public HashSet<string> History = new();
 
         public HistoryService()
         {
@@ -24,16 +24,16 @@ namespace Run.Services
             {
                 foreach (string command in (string[])Settings.Values["History"])
                 {
-                    History.Enqueue(command);
+                    History.Add(command);
                 }
             }
         }
 
         public async void AddItem(string command)
         {
-            History.Enqueue(command);
+            History.Add(command);
             if (History.Count > 30)
-                History.Dequeue();
+                History.Remove(History.Last());
             await SaveItemsAsync();
         }
 

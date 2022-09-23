@@ -23,7 +23,6 @@ namespace Run
             RunViewModel = new(this);
             this.InitializeComponent();
             Bindings.Update();
-            RunBox.Focus(FocusState.Pointer);
         }
 
         // Titlebar dragging without titlebar workaround
@@ -47,5 +46,7 @@ namespace Run
             SettingsWindow s_window = new SettingsWindow();
             s_window.Activate();
         }
+
+        private void RunBox_Loaded(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
     }
 }

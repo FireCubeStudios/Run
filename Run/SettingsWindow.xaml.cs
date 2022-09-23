@@ -32,6 +32,14 @@ namespace Run
         {
             this.InitializeComponent();
             this.ExtendsContentIntoTitleBar = true;
+            if (Settings.Hide)
+            {
+                Keyboard.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Keyboard.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -45,5 +53,7 @@ namespace Run
                 Keyboard.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void Exit_Click(object sender, RoutedEventArgs e) => Application.Current.Exit();
     }
 }

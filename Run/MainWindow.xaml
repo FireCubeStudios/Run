@@ -56,7 +56,7 @@
         <StackPanel VerticalAlignment="Center" Margin="0, 0, 0, 28" Spacing="8" HorizontalAlignment="Center">
             <TextBlock FontWeight="SemiBold" Text="Open:"/>
             <toolkit:DropShadowPanel ShadowOpacity="0.43" OffsetX="4" Color="Black" CornerRadius="8" OffsetY="4">
-                <ComboBox x:Name="RunBox" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}" IsEditable="True" Style="{ThemeResource GlowComboBox}" PlaceholderText="Type a program to run" Width="340">
+                <ComboBox x:Name="RunBox" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}" Loaded="RunBox_Loaded" IsEditable="True" Style="{ThemeResource GlowComboBox}" PlaceholderText="Type a program to run" Width="340">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
                             <TextBlock Text="{x:Bind }"/>

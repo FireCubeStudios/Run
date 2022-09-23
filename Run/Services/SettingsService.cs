@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.WinUI.Helpers;
+using Run.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,14 @@ namespace Run.Services
         public bool Hide
         {
             get => (bool)Settings.Values["Hide"];
-            set => Settings.Values["Hide"] = value;
+            set
+            {
+                Settings.Values["Hide"] = value;
+              /*  if((bool)value)
+                    RegistryHelper.DisableDefault();
+                else
+                    RegistryHelper.EnableDefault();*/
+            }
         }
 
         public SettingsService()

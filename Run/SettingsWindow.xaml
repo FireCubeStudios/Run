@@ -56,7 +56,7 @@
                         <settings:SettingsBlockControl.Icon>
                             <icons:FluentIconElement VerticalAlignment="Center" Symbol="EyeHide24"/>
                         </settings:SettingsBlockControl.Icon>
-                        <ToggleSwitch Toggled="ToggleSwitch_Toggled" IsOn="{x:Bind Settings.Hide, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
+                        <ToggleSwitch Toggled="ToggleSwitch_Toggled" IsOn="{x:Bind Settings.Hide, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="Hides" HorizontalAlignment="Right" OffContent="Exits"/>
                     </settings:SettingsBlockControl>
                     <settings:SettingsBlockControl x:Name="Keyboard" Title="Keyboard" Margin="2" Description="Note: Changing not supported in Preview">
                         <settings:SettingsBlockControl.Icon>
@@ -76,6 +76,7 @@
                     <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join Run → Discord</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/Run">GitHub repository</HyperlinkButton>
+                    <Button Click="Exit_Click" Margin="4,12,4,8" Width="150">Exit</Button>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

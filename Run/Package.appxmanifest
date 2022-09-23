@@ -4,21 +4,22 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  IgnorableNamespaces="uap rescap mp">
 
   <Identity
-    Name="03dc0181-1c4d-48e4-baed-f7bfe3e7d51a"
-    Publisher="CN=ayush"
-    Version="1.0.0.0" />
-
+    Name="2505FireCubeStudios.Run"
+    Publisher="CN=3C7C8FC9-7104-4B33-8730-EE1E929D5D3B"
+    Version="0.1.3.0" />
+  
   <Properties>
     <DisplayName>Run</DisplayName>
-    <PublisherDisplayName>ayush</PublisherDisplayName>
+    <PublisherDisplayName>FireCubeStudios</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
   </Dependencies>
 
@@ -45,4 +46,6 @@
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
+
+  <mp:PhoneIdentity PhoneProductId="c415ae30-7383-442f-b91c-cd9500fa3336" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 </Package>

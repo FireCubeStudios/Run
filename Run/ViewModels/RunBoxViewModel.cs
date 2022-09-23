@@ -43,8 +43,7 @@ namespace Run.ViewModels
             {
                 Recents.AddItem(commandText);
                 CommandText = "";
-                if(Settings.Hide)
-                    RunWindow.Hide();
+                Hide();
             }
             else
             {
@@ -53,7 +52,13 @@ namespace Run.ViewModels
         }
 
         [RelayCommand]
-        private void Hide() => RunWindow.Hide();
+        private void Hide()
+        {
+            if (Settings.Hide)
+                RunWindow.Hide();
+            else
+                App.Current.Exit();
+        }
 
         [RelayCommand]
         private async Task BrowseAsync()
