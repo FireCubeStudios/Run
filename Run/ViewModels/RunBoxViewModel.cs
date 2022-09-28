@@ -18,50 +18,33 @@ namespace Run.ViewModels
 {
     public partial class RunBoxViewModel : ObservableObject
     {
+        public EventHandler<bool> CommandExecuted;
+
         [ObservableProperty]
         private string commandText;
 
         public HistoryService Recents = App.Current.Services.GetService<HistoryService>();
-        private SettingsService Settings = App.Current.Services.GetService<SettingsService>();
-
-        private WindowEx RunWindow;
-
-        //  public RunBoxViewModel(WindowEx Window) => RunWindow = Window;
-
-        public RunBoxViewModel(WindowEx Window)
-        {
-            RunWindow = Window;
-        }
+        public SettingsService Settings = App.Current.Services.GetService<SettingsService>();
 
         [RelayCommand]
         private async void Run()
         {
-            if(String.IsNullOrEmpty(commandText))
+            if (String.IsNullOrEmpty(commandText))
+            {
+                CommandExecuted.Invoke(this, false);
                 return;
+            }
             bool Success = await CommandHelper.ExecuteCommand(commandText.Trim());
+            CommandExecuted.Invoke(this, Success);
             if (Success)
             {
                 Recents.AddItem(commandText);
                 CommandText = "";
-                Hide();
-            }
-            else
-            {
-
             }
         }
 
         [RelayCommand]
-        private void Hide()
-        {
-            if (Settings.Hide)
-                RunWindow.Hide();
-            else
-                App.Current.Exit();
-        }
-
-        [RelayCommand]
-        private async Task BrowseAsync()
+        private async Task BrowseAsync(WindowEx RunWindow)
         {
             var picker = RunWindow.CreateOpenFilePicker();
             picker.ViewMode = PickerViewMode.Thumbnail;

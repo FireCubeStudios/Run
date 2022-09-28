@@ -18,7 +18,7 @@ namespace Run.Services
         {
             if(SystemInformation.Instance.IsFirstRun)
             {
-                AddItem("winver");
+                AddItem("winver"); // Example command
             }
             else
             {
@@ -29,11 +29,11 @@ namespace Run.Services
             }
         }
 
-        public async void AddItem(string command)
+        public async Task AddItem(string command)
         {
             History.Add(command);
             if (History.Count > 30)
-                History.Remove(History.Last());
+                History.Remove(History.First());
             await SaveItemsAsync();
         }
 
@@ -41,6 +41,7 @@ namespace Run.Services
         {
             await Task.Run(() => {
                 Settings.Values["History"] = History.ToArray();
+                return Task.CompletedTask;  
             });
         }
     }

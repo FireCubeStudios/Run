@@ -41,7 +41,7 @@ namespace Run.Helpers
                 if(!success)
                 {
                     CmdRunner cmdRunner = new CmdRunner();
-                    success = await cmdRunner.HiddenRunAsync(command);
+                    await cmdRunner.HiddenRunAsync(command);
                 }
                 return success;
             }

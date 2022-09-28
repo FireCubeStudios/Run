@@ -22,6 +22,10 @@ namespace Run.Services
 
         private static bool IsR = false;
 
+        private const uint VK_WINDOWS = 0x5B;
+
+        private const uint VK_R = 0x52;
+
         public static void Initialize()
         {
             KeyboardHook = new KeyboardHelper();
@@ -30,22 +34,22 @@ namespace Run.Services
 
         private static void OnKeyPressed(object sender, KeyboardHelperEventArgs e)
         {
-            if (!Settings.Hide)
+            if (!Settings.PersistAppInBackground)
                 return;
             if (e.KeyboardState == KeyboardHelper.KeyboardState.KeyDown)
             {
-                if (e.KeyboardData.VirtualCode == 0x5B)
+                if (e.KeyboardData.VirtualCode == VK_WINDOWS)
                     IsWin = true;
-                if (e.KeyboardData.VirtualCode == 0x52)
+                if (e.KeyboardData.VirtualCode == VK_R)
                     IsR = true;
                 if (IsWin && IsR)
                     ((WindowEx)App.Current.m_window).Show();
             }
             else if(e.KeyboardState == KeyboardHelper.KeyboardState.KeyUp)
             {
-                if (e.KeyboardData.VirtualCode == 0x5B)
+                if (e.KeyboardData.VirtualCode == VK_WINDOWS)
                     IsWin = false;
-                if (e.KeyboardData.VirtualCode == 0x52)
+                if (e.KeyboardData.VirtualCode == VK_R)
                     IsR = false;
             }
         }

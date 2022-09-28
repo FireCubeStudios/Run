@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.WinUI.Helpers;
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.WinUI.Helpers;
 using Run.Helpers;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ using Windows.Storage;
 
 namespace Run.Services
 {
-    public class SettingsService
+    public partial class SettingsService
     {
         ApplicationDataContainer Settings = ApplicationData.Current.LocalSettings;
 
-        public bool Hide
+        public bool PersistAppInBackground
         {
             get => (bool)Settings.Values["Hide"];
             set
@@ -30,8 +31,15 @@ namespace Run.Services
         {
             if (SystemInformation.Instance.IsFirstRun)
             {
-                Settings.Values["Hide"] = true;
+                PersistAppInBackground = true;
             }
+        }
+
+        [RelayCommand]
+        public void LaunchSettings()
+        {
+            SettingsWindow s_window = new SettingsWindow();
+            s_window.Activate();
         }
     }
 }

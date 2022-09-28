@@ -6,6 +6,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage;
 using System;
 using Microsoft.Win32;
+using Microsoft.UI.Xaml.Media;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -20,21 +21,25 @@ namespace Run
         RunBoxViewModel RunViewModel;
         public MainWindow()
         {
-            RunViewModel = new(this);
+            RunViewModel = new();
             this.InitializeComponent();
+            RunViewModel.CommandExecuted += ProcessExecution;
             Bindings.Update();
         }
 
-        // Titlebar dragging without titlebar workaround
-        private void AppTitleBar_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void ProcessExecution(object sender, bool e)
         {
-            var appX = this.AppWindow.Position.X;
-            var appY = this.AppWindow.Position.Y;
-
-            var height = this.Height;
-            var width = this.Width;
-
-            this.MoveAndResize(appX + e.Position.X, appY + e.Position.Y, width, height);
+            if (e)
+            {
+                Exit();
+                RunBox.Foreground = (LinearGradientBrush)App.Current.Resources["AccentLinearGradientBrush"];
+            }
+            else
+            {
+                RunBox.Foreground = (LinearGradientBrush)App.Current.Resources["RedLinearGradientBrush"];
+                RunBox.Focus(FocusState.Pointer);
+                RunShakeAnimation.Start();
+            }
         }
 
         private void RunWindow_Activated(object sender, WindowActivatedEventArgs args) => RunBox.Focus(FocusState.Pointer);
@@ -48,5 +53,35 @@ namespace Run
         }
 
         private void RunBox_Loaded(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
+
+        //Obsolete
+        #region to remove
+        public void Exit()
+        {
+            if (RunViewModel.Settings.PersistAppInBackground)
+                this.Hide();
+            else
+                this.Close();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e) => Exit();
+
+        // Titlebar dragging without titlebar workaround
+        private void AppTitleBar_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            var appX = this.AppWindow.Position.X;
+            var appY = this.AppWindow.Position.Y;
+
+            var height = this.Height;
+            var width = this.Width;
+
+            this.MoveAndResize(appX + e.Position.X, appY + e.Position.Y, width, height);
+        }
+
+        private void RunBox_TextSubmitted(Microsoft.UI.Xaml.Controls.ComboBox sender, Microsoft.UI.Xaml.Controls.ComboBoxTextSubmittedEventArgs args)
+        {
+            RunViewModel.RunCommand.Execute(this);
+        }
+        #endregion
     }
 }

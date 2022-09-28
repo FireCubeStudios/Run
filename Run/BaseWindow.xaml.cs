@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Run.Services;
+using Run.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,32 +25,37 @@ namespace Run
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SettingsWindow : WindowEx
+    public partial class BaseWindow : WindowEx
     {
         public SettingsService Settings = App.Current.Services.GetService<SettingsService>();
+        public RunBoxViewModel RunViewModel;
 
-        public SettingsWindow()
+        public BaseWindow()
         {
+            RunViewModel = new();
             this.InitializeComponent();
-            this.ExtendsContentIntoTitleBar = true;
-            if (Settings.PersistAppInBackground)
-                Keyboard.Visibility = Visibility.Visible;
-            else
-                Keyboard.Visibility = Visibility.Collapsed;
         }
 
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        public void Exit()
         {
-            if(((ToggleSwitch)sender).IsOn)
-            {
-                Keyboard.Visibility = Visibility.Visible;
-            }
+            if (Settings.PersistAppInBackground)
+                this.Hide();
             else
-            {
-                Keyboard.Visibility = Visibility.Collapsed;
-            }
+                this.Close();
         }
 
-        private void Exit_Click(object sender, RoutedEventArgs e) => Application.Current.Exit();
+        private void Close_Click(object sender, RoutedEventArgs e) => Exit();
+
+        // Titlebar dragging without titlebar workaround
+        private void AppTitleBar_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            var appX = this.AppWindow.Position.X;
+            var appY = this.AppWindow.Position.Y;
+
+            var height = this.Height;
+            var width = this.Width;
+
+            this.MoveAndResize(appX + e.Position.X, appY + e.Position.Y, width, height);
+        }
     }
 }

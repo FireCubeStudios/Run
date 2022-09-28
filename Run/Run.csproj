@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
@@ -24,6 +24,7 @@
     <DefaultLanguage>en</DefaultLanguage>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="BaseWindow.xaml" />
     <None Remove="SettingsWindow.xaml" />
   </ItemGroup>
 
@@ -39,9 +40,11 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Animations" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.5" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
     <PackageReference Include="WinUIEx" Version="1.8.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
@@ -54,6 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CubeKit.UI\CubeKit.UI.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BaseWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="SettingsWindow.xaml">

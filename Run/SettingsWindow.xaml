@@ -30,7 +30,7 @@
                     Width="24" 
                     Height="24"/>
                     <TextBlock x:Name="AppTitle"
-                    Text="Run"
+                    Text="Run 11"
                     VerticalAlignment="Center"
                     Margin="8, 0, 0, 0"
                     Style="{StaticResource CaptionTextBlockStyle}" />
@@ -47,8 +47,8 @@
             <Grid>
                 <StackPanel x:Name="SettingsGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="100, 50, 300, 100">
                     <StackPanel Margin="4, 4, 4, 24" Orientation="Horizontal">
-                        <TextBlock FontSize="24" FontWeight="SemiBold">Run</TextBlock>
-                        <TextBlock FontSize="20" VerticalAlignment="Bottom" Margin="8, 0, 0, 0" Opacity="0.7"> Preview</TextBlock>
+                        <TextBlock FontSize="24" FontWeight="SemiBold">Run 11</TextBlock>
+                        <TextBlock FontSize="20" VerticalAlignment="Bottom" Margin="8, 0, 0, 0" Opacity="0.7">Preview</TextBlock>
                     </StackPanel>
                     <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">Options</TextBlock>
                     <TextBlock Margin="4, 0, 4, 4">More settings coming, App is currently in preview</TextBlock>
@@ -56,7 +56,7 @@
                         <settings:SettingsBlockControl.Icon>
                             <icons:FluentIconElement VerticalAlignment="Center" Symbol="EyeHide24"/>
                         </settings:SettingsBlockControl.Icon>
-                        <ToggleSwitch Toggled="ToggleSwitch_Toggled" IsOn="{x:Bind Settings.Hide, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="Hides" HorizontalAlignment="Right" OffContent="Exits"/>
+                        <ToggleSwitch Toggled="ToggleSwitch_Toggled" IsOn="{x:Bind Settings.PersistAppInBackground, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="Hides" HorizontalAlignment="Right" OffContent="Exits"/>
                     </settings:SettingsBlockControl>
                     <settings:SettingsBlockControl x:Name="Keyboard" Title="Keyboard" Margin="2" Description="Note: Changing not supported in Preview">
                         <settings:SettingsBlockControl.Icon>
@@ -69,12 +69,12 @@
                 <StackPanel Margin="100, 100, 50, 100" Width="200" x:Name="AboutPanel" HorizontalAlignment="Right" VerticalAlignment="Top">
                     <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 8">About this app</TextBlock>
                     <StackPanel Margin="4, 4, 4, 0" Orientation="Horizontal">
-                        <TextBlock FontSize="14">Run</TextBlock>
-                        <TextBlock FontSize="14" Margin="2, 0, 0, 0"> - Preview 0.1.x.0</TextBlock>
+                        <TextBlock FontSize="14">Run 11</TextBlock>
+                        <TextBlock FontSize="14" Margin="2, 0, 0, 0"> - Preview 0.2.x</TextBlock>
                     </StackPanel>
                     <TextBlock FontSize="14" Margin="4, 0, 4, 0" TextWrapping="WrapWholeWords">Developed by FireCubeStudios</TextBlock>
                     <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
-                    <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join Run → Discord</HyperlinkButton>
+                    <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join Run 11 Discord</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/Run">GitHub repository</HyperlinkButton>
                     <Button Click="Exit_Click" Margin="4,12,4,8" Width="150">Exit</Button>
                 </StackPanel>
