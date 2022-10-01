@@ -40,15 +40,22 @@ namespace Run.Services
             set
             {
                 Settings.Values["TempAppTheme"] = value;
-                if ((bool)value)
+                try
                 {
-                    App.Current.m_window.Close();
-                    App.Current.LaunchNewMain();
+                    if ((bool)value)
+                    {
+                        App.Current.m_window.Close();
+                        App.Current.LaunchNewMain();
+                    }
+                    else
+                    {
+                        App.Current.m_window.Close();
+                        App.Current.LauncNewTemp();
+                    }
                 }
-                else
+                catch
                 {
-                    App.Current.m_window.Close();
-                    App.Current.LauncNewTemp();
+
                 }
             }
         }
@@ -59,6 +66,7 @@ namespace Run.Services
             {
                 PersistAppInBackground = true;
                 AppTitle = "Run by FireCube and not by Microsoft";
+                TempAppTheme = true;
             }
             else if(SystemInformation.Instance.IsAppUpdated)
             {
