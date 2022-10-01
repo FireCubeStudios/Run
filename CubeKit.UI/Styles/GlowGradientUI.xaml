@@ -854,7 +854,7 @@
                             <ToolkitControls:DropShadowPanel BlurRadius="16.0" MinHeight="{TemplateBinding MinHeight}" ShadowOpacity="0.43" IsMasked="True" Grid.Row="1"
                           OffsetX="0.0" OffsetY="0.0" VerticalAlignment="Bottom" Color="{ThemeResource SystemAccentColorLight3}">
                                 <Grid VerticalAlignment="Bottom" Margin="0, 0, 0, 0" MinWidth="0.1"
-                            Height="2" x:Name="BottomBar" CornerRadius="0, 0, 4, 4" Background="Transparent"></Grid>
+                            Height="2" x:Name="BottomBar" CornerRadius="0, 0, 4, 4" Background="{TemplateBinding Foreground}"></Grid>
                             </ToolkitControls:DropShadowPanel>
                         </Grid>
 
@@ -1080,11 +1080,17 @@
                                 </VisualState>
                                 <VisualState x:Name="PointerFocused">
                                     <Storyboard>
+                                          <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundFocused}" />
+                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation Storyboard.TargetName="BottomBar" Duration="0:0:0.25" EnableDependentAnimation="True" Storyboard.TargetProperty="ScaleX" To="1"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="FocusedDropDown">
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundFocused}" />
+                                        </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PopupBorder" Storyboard.TargetProperty="Visibility" Duration="0">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
@@ -1142,7 +1148,13 @@
                                         <Setter Target="DropDownOverlay.Background" Value="{ThemeResource ComboBoxDropDownBackgroundPointerPressed}" />
                                     </VisualState.Setters>
                                 </VisualState>
-                                <VisualState x:Name="TextBoxUnfocused"/>
+                                <VisualState x:Name="TextBoxUnfocused">
+                                          <Storyboard>
+                                          <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForeground}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid.RowDefinitions>
@@ -1213,12 +1225,12 @@
                         <ContentPresenter x:Name="ContentPresenter"
                             Grid.Row="1"
                             Grid.Column="0"
+                            Foreground="{ThemeResource ComboBoxPlaceHolderForeground}" 
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <TextBlock x:Name="PlaceholderTextBlock"
-                                Text="{TemplateBinding PlaceholderText}"
-                               Foreground="{ThemeResource ComboBoxPlaceHolderForeground}" />
+                                Text="{TemplateBinding PlaceholderText}" Foreground="{ThemeResource ComboBoxPlaceHolderForeground}"/>
                         </ContentPresenter>
                         <TextBox x:Name="EditableText"
                             Grid.Row="1"
@@ -1231,7 +1243,7 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             PlaceholderText="{TemplateBinding PlaceholderText}"
-                            Foreground="{ThemeResource ComboBoxPlaceHolderForeground}"
+                            Foreground="{TemplateBinding Foreground}"
                             Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Visibility="Collapsed"
                             Width="340"

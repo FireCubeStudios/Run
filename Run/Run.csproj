@@ -26,6 +26,7 @@
   <ItemGroup>
     <None Remove="BaseWindow.xaml" />
     <None Remove="SettingsWindow.xaml" />
+    <None Remove="Themes\TempWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,5 +68,11 @@
     <Page Update="SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Update="Themes\TempWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>

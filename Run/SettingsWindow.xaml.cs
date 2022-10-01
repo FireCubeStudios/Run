@@ -51,5 +51,10 @@ namespace Run
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) => Application.Current.Exit();
+
+        private void Title_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          //  Settings.AppTitle = ((ComboBox)sender).SelectedValue as string;
+        }
     }
 }

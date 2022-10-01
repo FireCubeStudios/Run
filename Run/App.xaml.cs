@@ -70,13 +70,33 @@ namespace Run
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
+            SettingsService Settings = App.Current.Services.GetService<SettingsService>();
+            if (Settings.TempAppTheme) // temporary
+            {
+                m_window = new MainWindow();
+            }
+            else
+            {
+                m_window = new TempWindow();
+            }
             m_window.Activate();
             KeyboardService.Initialize();
         }
 
         public Window m_window;
 
+        // temporary
+        public void LauncNewTemp()
+        {
+            m_window = new TempWindow();
+            m_window.Activate();
+        }
+
+        public void LaunchNewMain()
+        {
+            m_window = new MainWindow();
+            m_window.Activate();
+        }
 
         private static void OnUnobservedException(object sender, UnobservedTaskExceptionEventArgs e) => e.SetObserved();
 

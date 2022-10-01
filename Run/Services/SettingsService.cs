@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI.Helpers;
 using Run.Helpers;
 using System;
@@ -10,7 +11,7 @@ using Windows.Storage;
 
 namespace Run.Services
 {
-    public partial class SettingsService
+    public partial class SettingsService : ObservableObject
     {
         ApplicationDataContainer Settings = ApplicationData.Current.LocalSettings;
 
@@ -27,11 +28,42 @@ namespace Run.Services
             }
         }
 
+        public string AppTitle
+        {
+            get => (string)Settings.Values["Title"];
+            set => Settings.Values["Title"] = value;
+        }
+
+        public bool TempAppTheme // temporary, true = default, false = other theme
+        {
+            get => (bool)Settings.Values["TempAppTheme"];
+            set
+            {
+                Settings.Values["TempAppTheme"] = value;
+                if ((bool)value)
+                {
+                    App.Current.m_window.Close();
+                    App.Current.LaunchNewMain();
+                }
+                else
+                {
+                    App.Current.m_window.Close();
+                    App.Current.LauncNewTemp();
+                }
+            }
+        }
+
         public SettingsService()
         {
             if (SystemInformation.Instance.IsFirstRun)
             {
                 PersistAppInBackground = true;
+                AppTitle = "Run by FireCube and not by Microsoft";
+            }
+            else if(SystemInformation.Instance.IsAppUpdated)
+            {
+                AppTitle = "Run by FireCube and not by Microsoft";
+                TempAppTheme = true;
             }
         }
 

@@ -7,6 +7,8 @@ using Windows.Storage;
 using System;
 using Microsoft.Win32;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,6 +27,8 @@ namespace Run
             this.InitializeComponent();
             RunViewModel.CommandExecuted += ProcessExecution;
             Bindings.Update();
+            BitmapImage b = new(new Uri("ms-appx:///Assets/Square44x44Logo.scale-100.png")); // why
+            AppFontIcon.Source = b;
         }
 
         private void ProcessExecution(object sender, bool e)
@@ -78,9 +82,10 @@ namespace Run
             this.MoveAndResize(appX + e.Position.X, appY + e.Position.Y, width, height);
         }
 
-        private void RunBox_TextSubmitted(Microsoft.UI.Xaml.Controls.ComboBox sender, Microsoft.UI.Xaml.Controls.ComboBoxTextSubmittedEventArgs args)
+        private void RunBox_TextSubmitted(ComboBox sender, ComboBoxTextSubmittedEventArgs args)
         {
-            RunViewModel.RunCommand.Execute(this);
+          //  if(RunBox.FocusState == FocusState.Unfocused)
+           //     RunViewModel.RunCommand.Execute(this);
         }
         #endregion
     }
