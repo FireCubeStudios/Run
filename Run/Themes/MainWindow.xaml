@@ -42,7 +42,7 @@
                     Width="24" 
                     Height="24"/>
                     <TextBlock x:Name="AppTitle"
-                    Text="Run by FireCube and not by Microsoft"
+                    Text="Run by FireCube (Not by microsoft)"
                     VerticalAlignment="Center"
                     Margin="8, 0, 0, 0"
                     Style="{StaticResource CaptionTextBlockStyle}" />

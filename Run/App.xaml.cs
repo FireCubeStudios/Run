@@ -19,6 +19,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Microsoft.Extensions.DependencyInjection;
 using Run.Services;
+using CommunityToolkit.WinUI.Helpers;
+using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -71,24 +73,28 @@ namespace Run
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             SettingsService Settings = App.Current.Services.GetService<SettingsService>();
+            if (SystemInformation.Instance.IsFirstRun)
+            {
+                o_window = new OOBEWindow();
+                o_window.Activate();
+                KeyboardService.Initialize();
+                return;
+            }
             if (Settings.TempAppTheme) // temporary
-            {
                 m_window = new MainWindow();
-            }
             else
-            {
-                m_window = new TempWindow();
-            }
+                m_window = new GlowWindow();
             m_window.Activate();
             KeyboardService.Initialize();
         }
 
         public Window m_window;
+        public Window o_window;
 
         // temporary
-        public void LauncNewTemp()
+        public void LaunchNewGlow()
         {
-            m_window = new TempWindow();
+            m_window = new GlowWindow();
             m_window.Activate();
         }
 

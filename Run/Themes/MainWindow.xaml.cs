@@ -50,12 +50,6 @@ namespace Run
 
         private void Focus(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            SettingsWindow s_window = new SettingsWindow();
-            s_window.Activate();
-        }
-
         private void RunBox_Loaded(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
 
         //Obsolete
@@ -84,8 +78,8 @@ namespace Run
 
         private void RunBox_TextSubmitted(ComboBox sender, ComboBoxTextSubmittedEventArgs args)
         {
-          //  if(RunBox.FocusState == FocusState.Unfocused)
-           //     RunViewModel.RunCommand.Execute(this);
+            if(RunBox.FocusState != FocusState.Unfocused)
+               RunViewModel.RunCommand.Execute(this);
         }
         #endregion
     }

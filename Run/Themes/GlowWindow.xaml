@@ -1,6 +1,6 @@
 ﻿<winex:WindowEx
     xmlns:winex="using:WinUIEx" 
-    x:Class="Run.TempWindow"
+    x:Class="Run.GlowWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Run"
@@ -14,7 +14,7 @@
     x:Name="RunWindow"
     Activated="RunWindow_Activated"
     Height="80"
-    Width="500"
+    Width="470"
     mc:Ignorable="d"    
     IsResizable="False"
     IsMaximizable="False"
@@ -42,7 +42,7 @@
                     Width="24" 
                     Height="24"/>
                     <TextBlock x:Name="AppTitle"
-                    Text="Run by FireCube and not by Microsoft"
+                    Text="Run by FireCube (Not by microsoft)"
                     VerticalAlignment="Center"
                     Margin="8, 0, 0, 0"
                     Style="{StaticResource CaptionTextBlockStyle}" />
@@ -53,16 +53,32 @@
                     Style="{StaticResource CaptionTextBlockStyle}"
                     Opacity="0.7"/>
                 </StackPanel>
-                <Button HorizontalAlignment="Right" Style="{ThemeResource CloseButton}" Click="Close_Click"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="4">
+                    <Button Command="{x:Bind RunViewModel.Settings.LaunchSettingsCommand}" Style="{ThemeResource SettingsToolbarButton}"/>
+                    <Button  Style="{ThemeResource CloseButton}" Click="Close_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
-        <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center" Margin="8, 32, 8, 8">
-            <Button Command="{x:Bind RunViewModel.Settings.LaunchSettingsCommand}" VerticalAlignment="Center" Style="{ThemeResource SettingsToolbarButton}"/>
-            <Button Command="{x:Bind RunViewModel.BrowseCommand}" CommandParameter="{x:Bind RunWindow}" Click="Focus" Style="{ThemeResource ToolbarButton}">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0, 24, 0, 0" Spacing="8" HorizontalAlignment="Center">
+            <Button Command="{x:Bind RunViewModel.BrowseCommand}" CommandParameter="{x:Bind RunWindow}" Style="{ThemeResource ToolbarButton}">
                 <cube:FluentSymbolIcon Symbol="Folder20"/>
             </Button>
+            <Button Style="{ThemeResource ToolbarButton}">
+                <cube:FluentSymbolIcon Symbol="History20"/>
+                <Button.Flyout>
+                    <Flyout>
+                        <ListView SelectionMode="Single" SelectionChanged="ListView_SelectionChanged" ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <TextBlock Text="{x:Bind }"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
             <toolkit:DropShadowPanel ShadowOpacity="0.43" OffsetX="4" Color="Black" CornerRadius="8" OffsetY="4">
-                <ComboBox x:Name="RunBox" TextSubmitted="RunBox_TextSubmitted" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}" Loaded="RunBox_Loaded" Foreground="{ThemeResource AccentLinearGradientBrush}" IsEditable="True" Style="{ThemeResource GlowComboBox}" PlaceholderText="Type a program to run" Width="340">
+                <TextBox x:Name="RunBox" TextChanged="RunBox_TextChanged" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Loaded="RunBox_Loaded" Foreground="{ThemeResource AccentLinearGradientBrush}" Style="{ThemeResource AccentGlowTextBox}" PlaceholderText="Type a program to run" Width="300">
                     <ani:Explicit.Animations>
                         <ani:AnimationSet x:Name="RunShakeAnimation" IsSequential="True">
                             <ani:OffsetAnimation From="0" To="8,0,0" Duration="0:0:0.0625"/>
@@ -73,14 +89,11 @@
                             <ani:OffsetAnimation From="-2,0,0" To="0,0,0" Duration="0:0:0.015625"/>
                         </ani:AnimationSet>
                     </ani:Explicit.Animations>
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="x:String">
-                            <TextBlock Text="{x:Bind }"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                </TextBox>
             </toolkit:DropShadowPanel>
-            <Button Command="{x:Bind RunViewModel.RunCommand}" Click="Focus" Width="50" Background="{ThemeResource MicaDarkBrush}" BorderBrush="{ThemeResource MicaBorderBrush}" Style="{ThemeResource ToolbarButton}">Run</Button>
+            <Button Command="{x:Bind RunViewModel.RunCommand}" Click="Focus" Style="{ThemeResource ToolbarButton}">
+                <cube:FluentSymbolIcon Symbol="ArrowRight20"/>
+            </Button>
         </StackPanel>
     </Grid>
 </winex:WindowEx>

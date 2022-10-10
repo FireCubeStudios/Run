@@ -50,7 +50,7 @@ namespace Run.Services
                     else
                     {
                         App.Current.m_window.Close();
-                        App.Current.LauncNewTemp();
+                        App.Current.LaunchNewGlow();
                     }
                 }
                 catch
@@ -65,12 +65,12 @@ namespace Run.Services
             if (SystemInformation.Instance.IsFirstRun)
             {
                 PersistAppInBackground = true;
-                AppTitle = "Run by FireCube and not by Microsoft";
+                AppTitle = "Run by FireCube (Not by microsoft)";
                 TempAppTheme = true;
             }
             else if(SystemInformation.Instance.IsAppUpdated)
             {
-                AppTitle = "Run by FireCube and not by Microsoft";
+                AppTitle = "Run by FireCube (Not by microsoft)";
                 TempAppTheme = true;
             }
         }

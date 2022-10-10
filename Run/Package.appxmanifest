@@ -8,12 +8,12 @@
   IgnorableNamespaces="uap rescap mp">
 
   <Identity
-    Name="2505FireCubeStudios.Run"
+    Name="2505FireCubeStudios.RunbyFireCubeNotbymicrosoft"
     Publisher="CN=3C7C8FC9-7104-4B33-8730-EE1E929D5D3B"
-    Version="0.3.12.0" />
+    Version="0.3.15.0" />
   
   <Properties>
-    <DisplayName>Run by FireCube and not by Microsoft</DisplayName>
+    <DisplayName>Run by FireCube (Not by microsoft)</DisplayName>
     <PublisherDisplayName>FireCubeStudios</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -32,8 +32,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Run by FireCube and not by Microsoft"
-        Description="Run not by microsoft"
+        DisplayName="Run by FireCube (Not by microsoft)"
+        Description="Run by FireCube (Not by microsoft)"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
@@ -47,5 +47,5 @@
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
 
-  <mp:PhoneIdentity PhoneProductId="0ee9383a-9eb9-426e-9a7b-ad5eccbbb25a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d33cbb05-da75-4abd-90a4-1f7dd6e96ab7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 </Package>

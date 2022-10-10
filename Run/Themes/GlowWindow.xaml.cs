@@ -18,10 +18,10 @@ namespace Run
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TempWindow : WindowEx
+    public sealed partial class GlowWindow : WindowEx
     {
         RunBoxViewModel RunViewModel;
-        public TempWindow()
+        public GlowWindow()
         {
             RunViewModel = new();
             this.InitializeComponent();
@@ -49,12 +49,6 @@ namespace Run
         private void RunWindow_Activated(object sender, WindowActivatedEventArgs args) => RunBox.Focus(FocusState.Pointer);
 
         private void Focus(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            SettingsWindow s_window = new SettingsWindow();
-            s_window.Activate();
-        }
 
         private void RunBox_Loaded(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
 
@@ -88,5 +82,15 @@ namespace Run
            //     RunViewModel.RunCommand.Execute(this);
         }
         #endregion
+
+        private void RunBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RunViewModel.RunCommand.Execute(this);
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RunViewModel.CommandText = (string)e.AddedItems[0];
+        }
     }
 }

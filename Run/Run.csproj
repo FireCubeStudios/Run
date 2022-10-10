@@ -24,9 +24,10 @@
     <DefaultLanguage>en</DefaultLanguage>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="BaseWindow.xaml" />
+    <None Remove="OOBEWindow.xaml" />
+    <None Remove="Pages\OOBEPage.xaml" />
     <None Remove="SettingsWindow.xaml" />
-    <None Remove="Themes\TempWindow.xaml" />
+    <None Remove="Themes\GlowWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,19 +61,23 @@
     <ProjectReference Include="..\CubeKit.UI\CubeKit.UI.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="BaseWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Update="OOBEWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Update="Themes\TempWindow.xaml">
+    <Page Update="Themes\GlowWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\OOBEPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
