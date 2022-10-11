@@ -1,5 +1,6 @@
 ## Run 11
 Modern Run dialog for Windows 11.
+Discord: https://discord.com/invite/3WYcKat
 
 **Download:**
 - x64 https://github.com/FireCubeStudios/Run/releases/tag/v0.3-x64
