@@ -32,6 +32,7 @@ namespace Run
         {
             this.InitializeComponent();
             this.ExtendsContentIntoTitleBar = true;
+            SetTitleBar(AppTitleBar);
             OOBE.Navigate(typeof(OOBEPage));
            // this.CenterOnScreen();
             //this.BringToFront();

@@ -13,71 +13,60 @@ namespace Run.Services
 {
     public partial class SettingsService : ObservableObject
     {
-        ApplicationDataContainer Settings = ApplicationData.Current.LocalSettings;
+        private static ApplicationDataContainer Settings = ApplicationData.Current.LocalSettings;
 
+        private bool autoPin = (bool)(Settings.Values["Hide"] ?? true);
         public bool PersistAppInBackground
         {
-            get => (bool)Settings.Values["Hide"];
+            get => autoPin;
             set
             {
                 Settings.Values["Hide"] = value;
-              /*  if((bool)value)
-                    RegistryHelper.DisableDefault();
-                else
-                    RegistryHelper.EnableDefault();*/
+                SetProperty(ref autoPin, value); 
             }
         }
 
-        public string AppTitle
+        private bool keyboardEnabled = (bool)(Settings.Values["KeyboardEnabled"] ?? true);
+        public bool KeyboardEnabled
         {
-            get => (string)Settings.Values["Title"];
-            set => Settings.Values["Title"] = value;
-        }
-
-        public bool TempAppTheme // temporary, true = default, false = other theme
-        {
-            get => (bool)Settings.Values["TempAppTheme"];
+            get => keyboardEnabled;
             set
             {
-                Settings.Values["TempAppTheme"] = value;
-                try
-                {
-                    if ((bool)value)
-                    {
-                        App.Current.m_window.Close();
-                        App.Current.LaunchNewMain();
-                    }
-                    else
-                    {
-                        App.Current.m_window.Close();
-                        App.Current.LaunchNewGlow();
-                    }
-                }
-                catch
-                {
-
-                }
+                Settings.Values["KeyboardEnabled"] = value;
+                SetProperty(ref keyboardEnabled, value);
+                if (value)
+                    KeyboardHelper.StartHook();
+                else
+                    KeyboardHelper.StopHook();
             }
         }
 
-        public SettingsService()
+        private static bool hasKey = (bool)(Settings.Values["HasKey"] ?? false);
+        public static bool HasKey
         {
-            if (SystemInformation.Instance.IsFirstRun)
+            get => hasKey;
+            set
             {
-                PersistAppInBackground = true;
-                AppTitle = "Run by FireCube (Not by microsoft)";
-                TempAppTheme = true;
+                Settings.Values["HasKey"] = value;
+                hasKey = value;
             }
-            else if(SystemInformation.Instance.IsAppUpdated)
+        }
+
+        private bool tray = (bool)(Settings.Values["Tray"] ?? false);
+        public bool TrayClippy
+        {
+            get => tray;
+            set
             {
-                AppTitle = "Run by FireCube (Not by microsoft)";
-                TempAppTheme = true;
+                Settings.Values["Tray"] = value;
+                SetProperty(ref tray, value);
             }
         }
 
         [RelayCommand]
-        public void LaunchSettings()
+        public async void LaunchSettings()
         {
+            await Task.Delay(500);
             SettingsWindow s_window = new SettingsWindow();
             s_window.Activate();
         }

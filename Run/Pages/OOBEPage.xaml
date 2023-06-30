@@ -288,9 +288,9 @@
                                                 <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                                             </icons:FluentSymbolIcon.RenderTransform>
                                         </icons:FluentSymbolIcon>
-                                        <TextBlock Text="Welcome to Run By FireCube (Not by microsoft)!" TextWrapping="WrapWholeWords" Width="325" FontSize="32" Margin="0,0,0,12" FontWeight="SemiBold" CharacterSpacing="-20"/>
+                                        <TextBlock Text="Welcome to Run!" TextWrapping="WrapWholeWords" Width="325" FontSize="32" Margin="0,0,0,12" FontWeight="SemiBold" CharacterSpacing="-20"/>
                                         <TextBlock Opacity="0.70" LineHeight="24" Width="325" HorizontalAlignment="Left"
-                            Text="Thank you for downloading Run By FireCube (Not by microsoft). After following this quick setup, you can begin using the app!" TextWrapping="WrapWholeWords"/>
+                            Text="Thank you for downloading Run. After following this quick setup, you can begin using the app!" TextWrapping="WrapWholeWords"/>
                                         <StackPanel Orientation="Horizontal" Margin="0,172,0,0" >
                                             <Button Content="Release Notes" Visibility="Collapsed" Background="Transparent" IsEnabled="False" BorderThickness="0.5" BorderBrush="{ThemeResource HvidSortBrush}" Padding="16,8,16,8"/>
                                         </StackPanel>

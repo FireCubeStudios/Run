@@ -8,7 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:icons="using:CubeKit.UI.Icons" 
     xmlns:settings="using:CubeKit.UI.Controls.Settings"
+    xmlns:controls="using:Run.Controls"
     MinWidth="890"
+    MinHeight="300"
     mc:Ignorable="d">
     <winex:WindowEx.Backdrop>
         <winex:MicaSystemBackdrop  />
@@ -17,7 +19,6 @@
         <Border x:Name="AppTitleBar"
                 IsHitTestVisible="True"
                 VerticalAlignment="Top"
-                Background="Transparent"
                 Height="40"
                 Canvas.ZIndex="1" 
                 Margin="12,0,0,0">
@@ -30,7 +31,7 @@
                     Width="24" 
                     Height="24"/>
                     <TextBlock x:Name="AppTitle"
-                    Text="Run by FireCube (Not by microsoft)"
+                    Text="Run by FireCube"
                     VerticalAlignment="Center"
                     Margin="8, 0, 0, 0"
                     Style="{StaticResource CaptionTextBlockStyle}" />
@@ -43,15 +44,36 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <ScrollViewer x:Name="SettingsPanel">
+        <ScrollViewer x:Name="SettingsPanel" Margin="0, 48, 0, 0">
             <Grid>
-                <StackPanel x:Name="SettingsGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="100, 50, 300, 100">
+                <StackPanel x:Name="SettingsGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="100, 2, 300, 100">
                     <StackPanel Margin="4, 4, 4, 24" Orientation="Horizontal">
-                        <TextBlock FontSize="24" FontWeight="SemiBold">Run by FireCube (Not by microsoft)</TextBlock>
+                        <TextBlock FontSize="24" FontWeight="SemiBold">Run</TextBlock>
                         <TextBlock FontSize="20" VerticalAlignment="Bottom" Margin="8, 0, 0, 0" Opacity="0.7">Preview</TextBlock>
                     </StackPanel>
                     <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">Options</TextBlock>
-                    <TextBlock Margin="4, 0, 4, 4">More settings coming, App is currently in preview</TextBlock>
+                  <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">API Key</TextBlock>
+                  <settings:SettingsBlockControl Title="OpenAI Api" Margin="2" Description="OpenAI API key for Run">
+                    <settings:SettingsBlockControl.Icon>
+                      <icons:FluentIconElement VerticalAlignment="Center" Symbol="Key24" Foreground="LightCoral"/>
+                    </settings:SettingsBlockControl.Icon>
+                    <settings:SettingsBlockControl.ExpandableContent>
+                      <StackPanel Spacing="12" Padding="24">
+                        <controls:APIBox/>
+                        <TextBlock>
+                          Enable Run to use AI to process natural language such as "Open the settings app".
+                          <LineBreak/>
+                          System information is NOT sent so personal applications will NOT launch
+                           <LineBreak/>
+                           A valid API KEY with TOKENS is needed
+                        </TextBlock>
+                        <TextBlock Foreground="{ThemeResource RedLinearGradientBrush}">
+                          Note: This gives GPT access to execute a single cmd command. 
+                        </TextBlock>
+                      </StackPanel>
+                    </settings:SettingsBlockControl.ExpandableContent>
+                  </settings:SettingsBlockControl>
+                  <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 28, 4, 2">Personalisation Options</TextBlock>
                     <settings:SettingsBlockControl Title="Remain in background" Margin="2" Description="Hide in background after running a command">
                         <settings:SettingsBlockControl.Icon>
                             <icons:FluentIconElement VerticalAlignment="Center" Symbol="EyeHide24"/>
@@ -64,34 +86,31 @@
                         </settings:SettingsBlockControl.Icon>
                         <TextBlock>Win + Shift + R</TextBlock>
                     </settings:SettingsBlockControl>
-                    <settings:SettingsBlockControl Title="Theme" Margin="2" Description="Choose between Classic and Compact">
-                        <settings:SettingsBlockControl.Icon>
-                            <icons:FluentIconElement VerticalAlignment="Center" Symbol="PaintBucket24"/>
-                        </settings:SettingsBlockControl.Icon>
-                        <ToggleSwitch IsOn="{x:Bind Settings.TempAppTheme, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="Classic" HorizontalAlignment="Right" OffContent="Compact"/>
-                    </settings:SettingsBlockControl>
-                    <!--  <settings:SettingsBlockControl Title="App title" Margin="2" Description="Needs app restart">
-                        <settings:SettingsBlockControl.Icon>
-                            <icons:FluentIconElement VerticalAlignment="Center" Symbol="AppTitle24"/>
-                        </settings:SettingsBlockControl.Icon>
-                        <ComboBox Style="{ThemeResource GlowComboBox}" MaxWidth="300" MinWidth="80" Foreground="{ThemeResource AccentLinearGradientBrush}" IsEditable="True" SelectedValue="{x:Bind Settings.AppTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="Title_SelectionChanged">
-                            <x:String>Run by FireCube and not by Microsoft</x:String>
-                            <x:String>Run 11</x:String>
-                            <x:String>Run</x:String>
-                        </ComboBox>
-                    </settings:SettingsBlockControl>-->
+                  <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 28, 4, 2">Information</TextBlock>
+                  <settings:SettingsBlockControl Title="Contact the developer, See new features, Get app support" Margin="2" Description="Join the Windows Apps Hub">
+                    <settings:SettingsBlockControl.Icon>
+                      <icons:FluentIconElement VerticalAlignment="Center" Symbol="people24"/>
+                    </settings:SettingsBlockControl.Icon>
+                    <Button Click="Hub_Click" Margin="4,12,4,8" Width="150" Style="{ThemeResource ToolbarButton}" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">Open</Button>
+                  </settings:SettingsBlockControl>
+                  <settings:SettingsBlockControl Title="Submit bugs, Track updates, View code" Margin="2" Description="Visit the GitHub repository">
+                    <settings:SettingsBlockControl.Icon>
+                      <icons:FluentIconElement VerticalAlignment="Center" Symbol="Bug24"/>
+                    </settings:SettingsBlockControl.Icon>
+                    <Button Click="GitHub_Click" Margin="4,12,4,8" Width="150" Style="{ThemeResource ToolbarButton}" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">Open</Button>
+                  </settings:SettingsBlockControl>
                 </StackPanel>
 
                 <StackPanel Margin="80, 100, 12, 40" Width="200" x:Name="AboutPanel" HorizontalAlignment="Right" VerticalAlignment="Top">
                     <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">About this app</TextBlock>
                     <StackPanel Margin="4, 0, 4, 0" Orientation="Horizontal">
-                        <TextBlock Opacity="0.7" FontSize="14" Margin="0, 0, 0, 0">Preview 0.3.x</TextBlock>
+                        <TextBlock Opacity="0.7" FontSize="14" Margin="0, 0, 0, 0">1.0</TextBlock>
                     </StackPanel>
                     <TextBlock FontSize="14" Margin="4, 0, 4, 0" TextWrapping="WrapWholeWords">Developed by FireCubeStudios</TextBlock>
                     <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join our Discord</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/Run">GitHub repository</HyperlinkButton>
-                    <Button Click="Exit_Click" Margin="4,12,4,8" Width="150">Exit</Button>
+                  <Button Click="Exit_Click" Margin="4,12,4,8" Width="150" Style="{ThemeResource ToolbarButton}" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">Exit</Button>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

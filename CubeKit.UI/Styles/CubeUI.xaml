@@ -6,6 +6,37 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///CubeKit.UI/Styles/CubeThemeDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="MicaFlyoutStyle"  TargetType="FlyoutPresenter">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="MaxHeight" Value="1400" />
+        <Setter Property="MaxWidth" Value="1400"/>
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="IsDefaultShadowEnabled" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="FlyoutPresenter">
+                    <Border CornerRadius="8" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">
+                        <Grid Background="{ThemeResource MicaDarkBrush}">
+                            <Grid Background="{ThemeResource MicaBlurBrush}">
+                                <ContentPresenter
+                        MaxWidth="{TemplateBinding MaxWidth}"
+                        MaxHeight="{TemplateBinding MaxHeight}"
+                        Margin="0"
+                                    Padding="0"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        ContentTransitions="{TemplateBinding ContentTransitions}"
+                        CornerRadius="6" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="CloseButton" TargetType="Button">
         <Setter Property="Foreground" Value="{ThemeResource SplitButtonForeground}" />
         <Setter Property="BorderBrush" Value="Transparent" />

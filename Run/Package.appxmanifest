@@ -10,10 +10,10 @@
   <Identity
     Name="2505FireCubeStudios.RunbyFireCubeNotbymicrosoft"
     Publisher="CN=3C7C8FC9-7104-4B33-8730-EE1E929D5D3B"
-    Version="0.3.15.0" />
+    Version="0.3.18.0" />
   
   <Properties>
-    <DisplayName>Run by FireCube (Not by microsoft)</DisplayName>
+    <DisplayName>Run</DisplayName>
     <PublisherDisplayName>FireCubeStudios</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -32,7 +32,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Run by FireCube (Not by microsoft)"
+        DisplayName="Run"
         Description="Run by FireCube (Not by microsoft)"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"

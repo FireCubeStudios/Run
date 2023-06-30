@@ -8,30 +8,9 @@ using System.Diagnostics;
 
 namespace Run.Helpers
 {
-    public class CmdRunner : ICommandRunner
+    public static class CmdRunner
     {
-        public async Task<bool> RunAsync(string command)
-        {
-            try
-            {
-                await Task.Run(() =>
-                {
-                    command.Replace("cmd", "");
-                    ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + command.Trim());
-                    procStartInfo.UseShellExecute = true;
-                    Process proc = new Process();
-                    proc.StartInfo = procStartInfo;
-                    proc.Start();
-                });
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> HiddenRunAsync(string command)
+        public static async Task<bool> RunAsync(string command, bool isAdmin)
         {
             try
             {
@@ -41,11 +20,58 @@ namespace Run.Helpers
                     ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + command.Trim());
                     procStartInfo.UseShellExecute = false;
                     procStartInfo.CreateNoWindow = true;
-                    Process proc = new Process();
-                    proc.StartInfo = procStartInfo;
-                    proc.Start();
+                    procStartInfo.RedirectStandardOutput = true;
+                    procStartInfo.RedirectStandardError = true;
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo = procStartInfo;
+                        process.Start();
+
+                        // Read the output and error streams
+                        string output = process.StandardOutput.ReadToEnd();
+                        string error = process.StandardError.ReadToEnd();
+
+                        process.WaitForExit();
+
+                        return process.ExitCode == 0;
+                    }
                 });
-                return true;
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static async Task<bool> HiddenRunAsync(string command, bool IsAdmin)
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    command.Replace("cmd", "");
+                    ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + command.Trim());
+                    procStartInfo.UseShellExecute = false;
+                    procStartInfo.CreateNoWindow = true;
+                    procStartInfo.RedirectStandardOutput = true;
+                    procStartInfo.RedirectStandardError = true;
+                    procStartInfo.Verb = IsAdmin ? "runas" : "";
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo = procStartInfo;
+                        process.Start();
+
+                        // Read the output and error streams
+                        string output = process.StandardOutput.ReadToEnd();
+                        string error = process.StandardError.ReadToEnd();
+
+                        process.WaitForExit();
+
+                        return process.ExitCode == 0;
+                    }
+                });
+                return false;
             }
             catch
             {

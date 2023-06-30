@@ -9,15 +9,14 @@ using Windows.System;
 
 namespace Run.Helpers
 {
-    public class PathRunner : ICommandRunner
+    public class PathRunner : IAdminCommandRunner
     {
-        public async Task<bool> RunAsync(string command)
+        public async Task<bool> RunAsync(string command, bool isAdmin)
         {
         
             try
             {
-                CmdRunner cmdRunner = new CmdRunner();
-                return await cmdRunner.HiddenRunAsync(@$"start %windir%\explorer.exe {command}");
+                return await CmdRunner.HiddenRunAsync(@$"start %windir%\explorer.exe {command}", isAdmin);
             }
             catch
             {

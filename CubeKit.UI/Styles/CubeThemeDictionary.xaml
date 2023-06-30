@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Converters="using:CubeKit.UI.Converters">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Converters="using:CubeKit.UI.Converters" xmlns:media="using:CommunityToolkit.WinUI.UI.Media">
     <Converters:BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     <LinearGradientBrush x:Key="AccentLinearGradientBrush" StartPoint="0,0" EndPoint="1,0">
         <GradientStop Color="{ThemeResource SystemAccentColorLight1}" Offset="0.0" />
@@ -12,6 +12,7 @@
         <GradientStop Color="Red" Offset="0.5" />
         <GradientStop Color="#e96e60" Offset="1.0" />
     </LinearGradientBrush>
+    <media:BackdropBlurBrush x:Key="MicaBlurBrush" Amount="240"/>
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
             <ResourceDictionary.MergedDictionaries>

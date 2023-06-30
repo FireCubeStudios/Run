@@ -1,7 +1,8 @@
 {
   "profiles": {
     "Run (Package)": {
-      "commandName": "MsixPackage"
+      "commandName": "MsixPackage",
+      "nativeDebugging": true
     },
     "Run (Unpackaged)": {
       "commandName": "Project"

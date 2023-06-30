@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -32,6 +33,7 @@ namespace Run
         {
             this.InitializeComponent();
             this.ExtendsContentIntoTitleBar = true;
+            SetTitleBar(AppTitleBar);
             if (Settings.PersistAppInBackground)
                 Keyboard.Visibility = Visibility.Visible;
             else
@@ -49,6 +51,11 @@ namespace Run
                 Keyboard.Visibility = Visibility.Collapsed;
             }
         }
+
+        private async void Hub_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("https://discord.gg/3WYcKat"));
+
+        private async void GitHub_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("https://github.com/FireCube/Run"));
+
 
         private void Exit_Click(object sender, RoutedEventArgs e) => Application.Current.Exit();
 

@@ -92,16 +92,7 @@ namespace Run.Pages
             try
             {
                 ApplicationDataContainer SettingsT = ApplicationData.Current.LocalSettings;
-                if (Theme.SelectedIndex == 0)
-                {
-                    App.Current.LaunchNewMain();
-                    SettingsT.Values["TempAppTheme"] = true;
-                }
-                else
-                {
-                    App.Current.LaunchNewGlow();
-                    SettingsT.Values["TempAppTheme"] = false;
-                }
+                App.Current.m_window.Show();
                 App.Current.o_window.Hide();
             }
             catch

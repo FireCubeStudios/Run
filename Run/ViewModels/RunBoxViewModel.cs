@@ -34,7 +34,24 @@ namespace Run.ViewModels
                 CommandExecuted.Invoke(this, false);
                 return;
             }
-            bool Success = await CommandHelper.ExecuteCommand(commandText.Trim());
+            bool Success = await CommandHelper.ExecuteCommand(commandText.Trim(), false);
+            CommandExecuted.Invoke(this, Success);
+            if (Success)
+            {
+                Recents.AddItem(commandText);
+                CommandText = "";
+            }
+        }
+
+        [RelayCommand]
+        private async void RunAdmin()
+        {
+            if (String.IsNullOrEmpty(commandText))
+            {
+                CommandExecuted.Invoke(this, false);
+                return;
+            }
+            bool Success = await CommandHelper.ExecuteCommand(commandText.Trim(), true);
             CommandExecuted.Invoke(this, Success);
             if (Success)
             {

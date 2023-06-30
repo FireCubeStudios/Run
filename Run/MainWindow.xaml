@@ -11,6 +11,8 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core" 
     xmlns:ani="using:CommunityToolkit.WinUI.UI.Animations"
+    xmlns:Labs="using:CommunityToolkit.Labs.WinUI" 
+    xmlns:controls="using:Run.Controls"
     x:Name="RunWindow"
     Activated="RunWindow_Activated"
     Height="180"
@@ -42,7 +44,7 @@
                     Width="24" 
                     Height="24"/>
                     <TextBlock x:Name="AppTitle"
-                    Text="Run by FireCube (Not by microsoft)"
+                    Text="Run"
                     VerticalAlignment="Center"
                     Margin="8, 0, 0, 0"
                     Style="{StaticResource CaptionTextBlockStyle}" />
@@ -56,15 +58,10 @@
                 <Button HorizontalAlignment="Right" Style="{ThemeResource CloseButton}" Click="Close_Click"/>
             </Grid>
         </Border>
-        <StackPanel VerticalAlignment="Center" Margin="0, 0, 0, 28" Spacing="8" HorizontalAlignment="Center">
+        <StackPanel VerticalAlignment="Center" Margin="0, 0, 0, 28" HorizontalAlignment="Center">
             <TextBlock FontWeight="SemiBold" Text="Open:"/>
             <toolkit:DropShadowPanel ShadowOpacity="0.43" OffsetX="4" Color="Black" CornerRadius="8" OffsetY="4">
-                <ComboBox x:Name="RunBox" TextSubmitted="RunBox_TextSubmitted" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}" Loaded="RunBox_Loaded" Foreground="{ThemeResource AccentLinearGradientBrush}" IsEditable="True" Style="{ThemeResource GlowComboBox}" PlaceholderText="Type a program to run" Width="340">
-                  <!--  <Interactivity:Interaction.Behaviors>
-                        <Interactions:EventTriggerBehavior EventName="TextSubmitted">
-                            <Interactions:InvokeCommandAction Command="{Binding RunViewModel.RunCommand}"/>
-                        </Interactions:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>-->
+                <AutoSuggestBox  Visibility="Collapsed" QuerySubmitted="RunBox_QuerySubmitted"  ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}" Loaded="RunBox_Loaded" Foreground="{ThemeResource AccentLinearGradientBrush}" PlaceholderText="Type a program to run" Width="340">
                     <ani:Explicit.Animations>
                         <ani:AnimationSet x:Name="RunShakeAnimation" IsSequential="True">
                             <ani:OffsetAnimation From="0" To="8,0,0" Duration="0:0:0.0625"/>
@@ -75,20 +72,29 @@
                             <ani:OffsetAnimation From="-2,0,0" To="0,0,0" Duration="0:0:0.015625"/>
                         </ani:AnimationSet>
                     </ani:Explicit.Animations>
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="x:String">
-                            <TextBlock Text="{x:Bind }"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                </AutoSuggestBox>
             </toolkit:DropShadowPanel>
-         <!--   <TextBox Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+            <controls:RunBox x:Name="RunBox" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0, 4, 0, 8"/>
         </StackPanel>
         <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="54" Background="{ThemeResource LayerFillColorDefaultBrush}">
             <Button Command="{x:Bind RunViewModel.Settings.LaunchSettingsCommand}" VerticalAlignment="Center" Margin="12" HorizontalAlignment="Left" Style="{ThemeResource SettingsToolbarButton}"/>
-            <StackPanel Spacing="12" VerticalAlignment="Center" Margin="12" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Command="{x:Bind RunViewModel.RunCommand}" Click="Focus" Width="80" Background="{ThemeResource MicaDarkBrush}" BorderBrush="{ThemeResource MicaBorderBrush}" Style="{ThemeResource ToolbarButton}">Run</Button>
-                <Button Command="{x:Bind RunViewModel.BrowseCommand}" CommandParameter="{x:Bind RunWindow}" Click="Focus" Width="80" Style="{ThemeResource ToolbarButton}" BorderBrush="{ThemeResource MicaBorderBrush}">Browse</Button>
+            <StackPanel Spacing="12" VerticalAlignment="Center" Margin="12, 0, 12, 0" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Height="34" Style="{ThemeResource RunGlowToolbarButton}">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Canvas.ZIndex="2" Command="{x:Bind RunViewModel.RunCommand}" Click="Focus" Width="56" Height="30" Style="{ThemeResource ToolbarButton}" CornerRadius="4, 0, 0, 4">Run</Button>
+                            <Button Canvas.ZIndex="2" Width="34" Height="32" Style="{ThemeResource ChevronToolbarButton}" CornerRadius="0, 4, 4, 0">
+                                <Button.Flyout>
+                                    <Flyout FlyoutPresenterStyle="{ThemeResource MicaFlyoutStyle}">
+                                        <Button Command="{x:Bind RunViewModel.RunAdminCommand}" Click="Focus" Width="160" Style="{ThemeResource ToolbarButton}">Run as Administrator</Button>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
+                        <AppBarSeparator Canvas.ZIndex="2" HorizontalAlignment="Right" Margin="0, 0, 32, 0"/>
+                    </Grid>
+                </Button>
+                <Button Command="{x:Bind RunViewModel.BrowseCommand}" CommandParameter="{x:Bind RunWindow}" Click="Focus" Width="80" Height="32" Style="{ThemeResource GlowToolbarButton}">Browse</Button>
             </StackPanel>
         </Grid>
     </Grid>

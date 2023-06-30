@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Run.Services;
 using CommunityToolkit.WinUI.Helpers;
 using WinUIEx;
+using Run.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -77,32 +78,22 @@ namespace Run
             {
                 o_window = new OOBEWindow();
                 o_window.Activate();
-                KeyboardService.Initialize();
+                if (new SettingsService().KeyboardEnabled)
+                    KeyboardHelper.StartHook();
+                else
+                    KeyboardHelper.StopHook();
                 return;
             }
-            if (Settings.TempAppTheme) // temporary
-                m_window = new MainWindow();
-            else
-                m_window = new GlowWindow();
+            m_window = new MainWindow();
             m_window.Activate();
-            KeyboardService.Initialize();
+            if (new SettingsService().KeyboardEnabled)
+                KeyboardHelper.StartHook();
+            else
+                KeyboardHelper.StopHook();
         }
 
         public Window m_window;
         public Window o_window;
-
-        // temporary
-        public void LaunchNewGlow()
-        {
-            m_window = new GlowWindow();
-            m_window.Activate();
-        }
-
-        public void LaunchNewMain()
-        {
-            m_window = new MainWindow();
-            m_window.Activate();
-        }
 
         private static void OnUnobservedException(object sender, UnobservedTaskExceptionEventArgs e) => e.SetObserved();
 
