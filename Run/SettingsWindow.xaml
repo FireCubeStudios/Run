@@ -49,23 +49,24 @@
                 <StackPanel x:Name="SettingsGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="100, 2, 300, 100">
                     <StackPanel Margin="4, 4, 4, 24" Orientation="Horizontal">
                         <TextBlock FontSize="24" FontWeight="SemiBold">Run</TextBlock>
-                        <TextBlock FontSize="20" VerticalAlignment="Bottom" Margin="8, 0, 0, 0" Opacity="0.7">Preview</TextBlock>
+                        <TextBlock FontSize="20" VerticalAlignment="Bottom" Margin="8, 0, 0, 0" Opacity="0.7"> by FireCube</TextBlock>
                     </StackPanel>
                     <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">Options</TextBlock>
-                  <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">API Key</TextBlock>
-                  <settings:SettingsBlockControl Title="OpenAI Api" Margin="2" Description="OpenAI API key for Run">
+                    <settings:SettingsBlockControl Title="OpenAI Api" Margin="2" Description="OpenAI API key for Run">
                     <settings:SettingsBlockControl.Icon>
-                      <icons:FluentIconElement VerticalAlignment="Center" Symbol="Key24" Foreground="LightCoral"/>
+                            <icons:FluentIconElement VerticalAlignment="Center" Symbol="Key24" Foreground="#e96e60"/>
                     </settings:SettingsBlockControl.Icon>
                     <settings:SettingsBlockControl.ExpandableContent>
                       <StackPanel Spacing="12" Padding="24">
                         <controls:APIBox/>
                         <TextBlock>
-                          Enable Run to use AI to process natural language such as "Open the settings app".
+                          Enable Run to use AI to process natural language such as "Open the settings app"
+                            <LineBreak/>
+                          However may not work everytime.
                           <LineBreak/>
                           System information is NOT sent so personal applications will NOT launch
                            <LineBreak/>
-                           A valid API KEY with TOKENS is needed
+                          A valid API KEY with TOKENS is needed
                         </TextBlock>
                         <TextBlock Foreground="{ThemeResource RedLinearGradientBrush}">
                           Note: This gives GPT access to execute a single cmd command. 
@@ -80,11 +81,23 @@
                         </settings:SettingsBlockControl.Icon>
                         <ToggleSwitch Toggled="ToggleSwitch_Toggled" IsOn="{x:Bind Settings.PersistAppInBackground, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="Hides" HorizontalAlignment="Right" OffContent="Exits"/>
                     </settings:SettingsBlockControl>
-                    <settings:SettingsBlockControl x:Name="Keyboard" Title="Keyboard" Margin="2" Description="Note: Changing not supported in Preview">
+                    <settings:SettingsBlockControl x:Name="Keyboard" Title="Keyboard" Margin="2" Description="Override the default Run shortcut of Win + R">
                         <settings:SettingsBlockControl.Icon>
                             <icons:FluentIconElement VerticalAlignment="Center" Symbol="Keyboard24"/>
                         </settings:SettingsBlockControl.Icon>
-                        <TextBlock>Win + Shift + R</TextBlock>
+                        <ToggleSwitch IsOn="{x:Bind Settings.KeyboardEnabled, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="Win + R" HorizontalAlignment="Right" OffContent="Off"/>
+                    </settings:SettingsBlockControl>
+                    <settings:SettingsBlockControl Title="Show Clippy in Tray" Margin="2" Description="Summon Clippy from the System Tray area">
+                        <settings:SettingsBlockControl.Icon>
+                            <icons:FluentIconElement VerticalAlignment="Center" Symbol="Apps24"/>
+                        </settings:SettingsBlockControl.Icon>
+                        <ToggleSwitch IsOn="{x:Bind Settings.Tray, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
+                    </settings:SettingsBlockControl>
+                    <settings:SettingsBlockControl Title="Close after command" Margin="2" Description="Close the window after the command is run">
+                        <settings:SettingsBlockControl.Icon>
+                            <icons:FluentIconElement VerticalAlignment="Center" Symbol="Delete24"/>
+                        </settings:SettingsBlockControl.Icon>
+                        <ToggleSwitch IsOn="{x:Bind Settings.Exit, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="On" HorizontalAlignment="Right" OffContent="Off"/>
                     </settings:SettingsBlockControl>
                   <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 28, 4, 2">Information</TextBlock>
                   <settings:SettingsBlockControl Title="Contact the developer, See new features, Get app support" Margin="2" Description="Join the Windows Apps Hub">
@@ -104,13 +117,13 @@
                 <StackPanel Margin="80, 100, 12, 40" Width="200" x:Name="AboutPanel" HorizontalAlignment="Right" VerticalAlignment="Top">
                     <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">About this app</TextBlock>
                     <StackPanel Margin="4, 0, 4, 0" Orientation="Horizontal">
-                        <TextBlock Opacity="0.7" FontSize="14" Margin="0, 0, 0, 0">1.0</TextBlock>
+                        <TextBlock Opacity="0.7" FontSize="14" Margin="0, 0, 0, 0">2.0</TextBlock>
                     </StackPanel>
                     <TextBlock FontSize="14" Margin="4, 0, 4, 0" TextWrapping="WrapWholeWords">Developed by FireCubeStudios</TextBlock>
                     <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join our Discord</HyperlinkButton>
                     <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/Run">GitHub repository</HyperlinkButton>
-                  <Button Click="Exit_Click" Margin="4,12,4,8" Width="150" Style="{ThemeResource ToolbarButton}" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">Exit</Button>
+                    <Button Click="Exit_Click" Margin="4,12,4,8" Width="150" Style="{ThemeResource ToolbarButton}" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">Exit</Button>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

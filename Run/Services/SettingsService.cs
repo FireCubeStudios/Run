@@ -53,13 +53,29 @@ namespace Run.Services
         }
 
         private bool tray = (bool)(Settings.Values["Tray"] ?? false);
-        public bool TrayClippy
+        public bool Tray
         {
             get => tray;
             set
             {
                 Settings.Values["Tray"] = value;
                 SetProperty(ref tray, value);
+                SetProperty(ref tray, value);
+                if (value)
+                    TrayService.Recreate();
+                else
+                    TrayService.Remove();
+            }
+        }
+
+        private bool exit = (bool)(Settings.Values["Exit"] ?? true);
+        public bool Exit
+        {
+            get => exit;
+            set
+            {
+                Settings.Values["Exit"] = value;
+                SetProperty(ref exit, value);
             }
         }
 

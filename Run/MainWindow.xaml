@@ -44,7 +44,7 @@
                     Width="24" 
                     Height="24"/>
                     <TextBlock x:Name="AppTitle"
-                    Text="Run"
+                    Text="Run by FireCube"
                     VerticalAlignment="Center"
                     Margin="8, 0, 0, 0"
                     Style="{StaticResource CaptionTextBlockStyle}" />
@@ -58,27 +58,17 @@
                 <Button HorizontalAlignment="Right" Style="{ThemeResource CloseButton}" Click="Close_Click"/>
             </Grid>
         </Border>
-        <StackPanel VerticalAlignment="Center" Margin="0, 0, 0, 28" HorizontalAlignment="Center">
+        <StackPanel VerticalAlignment="Center" Spacing="4" Margin="0, 0, 0, 28" HorizontalAlignment="Center">
             <TextBlock FontWeight="SemiBold" Text="Open:"/>
-            <toolkit:DropShadowPanel ShadowOpacity="0.43" OffsetX="4" Color="Black" CornerRadius="8" OffsetY="4">
-                <AutoSuggestBox  Visibility="Collapsed" QuerySubmitted="RunBox_QuerySubmitted"  ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}" Loaded="RunBox_Loaded" Foreground="{ThemeResource AccentLinearGradientBrush}" PlaceholderText="Type a program to run" Width="340">
-                    <ani:Explicit.Animations>
-                        <ani:AnimationSet x:Name="RunShakeAnimation" IsSequential="True">
-                            <ani:OffsetAnimation From="0" To="8,0,0" Duration="0:0:0.0625"/>
-                            <ani:OffsetAnimation From="8,0,0" To="-8,0,0" Duration="0:0:0.125"/>
-                            <ani:OffsetAnimation From="-8,0,0" To="6,0,0" Duration="0:0:0.109375"/>
-                            <ani:OffsetAnimation From="6,0,0" To="-6,0,0" Duration="0:0:0.09375"/>
-                            <ani:OffsetAnimation From="-6,0,0" To="2,0,0" Duration="0:0:0.0625"/>
-                            <ani:OffsetAnimation From="-2,0,0" To="0,0,0" Duration="0:0:0.015625"/>
-                        </ani:AnimationSet>
-                    </ani:Explicit.Animations>
-                </AutoSuggestBox>
-            </toolkit:DropShadowPanel>
-            <controls:RunBox x:Name="RunBox" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0, 4, 0, 8"/>
+            <controls:RunBox x:Name="RunBox" RunViewModel="{x:Bind RunViewModel, Mode=OneWay}" Text="{x:Bind RunViewModel.CommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextSubmitted="RunBox_TextSubmitted" Expanded="RunBox_Expanded" Collapsed="RunBox_Collapsed"/>
         </StackPanel>
         <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="54" Background="{ThemeResource LayerFillColorDefaultBrush}">
             <Button Command="{x:Bind RunViewModel.Settings.LaunchSettingsCommand}" VerticalAlignment="Center" Margin="12" HorizontalAlignment="Left" Style="{ThemeResource SettingsToolbarButton}"/>
             <StackPanel Spacing="12" VerticalAlignment="Center" Margin="12, 0, 12, 0" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Grid>
+                    <ProgressRing IsActive="{x:Bind RunViewModel.RunCommand.IsRunning, Mode=OneWay}" Height="24" Width="24"/>
+                    <ProgressRing IsActive="{x:Bind RunViewModel.RunAdminCommand.IsRunning, Mode=OneWay}" Height="24" Width="24"/>
+                </Grid>
                 <Button Height="34" Style="{ThemeResource RunGlowToolbarButton}">
                     <Grid>
                         <StackPanel Orientation="Horizontal">

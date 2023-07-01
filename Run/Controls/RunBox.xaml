@@ -342,6 +342,8 @@
                             IsChecked="False"
                             Width="32"
                             Height="30"
+                            Checked="ChevronButton_Checked"
+                            Unchecked="ChevronButton_UnChecked"
                             Style="{ThemeResource ChevronDownToolbarToggleButton}"
                             Grid.Row="1"
                             Grid.Column="2"/>
@@ -359,7 +361,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <StackPanel Spacing="12">
         <toolkit:DropShadowPanel ShadowOpacity="0.4" OffsetX="4" CornerRadius="8" OffsetY="4">
             <TextBox x:Name="Run" Text="{x:Bind Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="340" PlaceholderText="Type a program to run..." LostFocus="Run_LostFocus" GotFocus="Run_GotFocus" KeyDown="Run_KeyDown" TextChanged="Run_TextChanged" Style="{ThemeResource RunGlowTextBoxStyle}">
                 <ani:Explicit.Animations>
@@ -374,5 +376,7 @@
                 </ani:Explicit.Animations>
             </TextBox>
         </toolkit:DropShadowPanel>
-    </Grid>
+
+        <ListView x:Name="RecentsList" Height="90" SelectionMode="Single" ItemsSource="{x:Bind RunViewModel.Recents.History, Mode=OneWay}" ItemContainerStyle="{ThemeResource GlowListViewItemStyle}" Visibility="Collapsed" SelectionChanged="RecentsList_SelectionChanged"/>
+    </StackPanel>
 </UserControl>

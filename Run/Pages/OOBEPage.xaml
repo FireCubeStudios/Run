@@ -9,7 +9,7 @@
     xmlns:Materials="using:CubeKit.UI.Materials" 
     xmlns:controls="using:CubeKit.UI.Controls.Toolkit" 
     xmlns:icons="using:CubeKit.UI.Icons"
-    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:media="using:CommunityToolkit.WinUI.UI.Media" xmlns:Lcontrols="using:Run.Controls"
     Background="Transparent"
     mc:Ignorable="d">
     <Page.Resources>
@@ -315,9 +315,30 @@
                                         <Grid Padding="12, 8, 12, 4" Background="{ThemeResource LayerFillColorDefaultBrush}" Margin="4, 8, 12, 8" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">
                                             <StackPanel HorizontalAlignment="Left">
                                                 <TextBlock Text="Remain in background" MaxWidth="220" FontWeight="SemiBold" Margin="0, 0, 0, 4"/>
-                                                <TextBlock Text="**Required for Win + Shift + R" MaxWidth="220" Opacity="0.7" />
+                                                <TextBlock Text="**Required for keyboard shortcut" MaxWidth="220" Opacity="0.7" />
                                             </StackPanel>
                                             <ToggleSwitch IsOn="{x:Bind Settings.PersistAppInBackground, Mode=TwoWay}" Margin="4, 4, -80, 4" Style="{ThemeResource GlowSwitch}" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Padding="12, 8, 12, 4" Background="{ThemeResource LayerFillColorDefaultBrush}" Margin="4, 8, 12, 8" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">
+                                            <StackPanel HorizontalAlignment="Left">
+                                                <TextBlock Text="Keyboard shortcut" MaxWidth="220" FontWeight="SemiBold" Margin="0, 0, 0, 4"/>
+                                                <TextBlock Text="Override Run shortcut Win + R" MaxWidth="220" Opacity="0.7" />
+                                            </StackPanel>
+                                            <ToggleSwitch IsOn="{x:Bind Settings.KeyboardEnabled, Mode=TwoWay}" Margin="4, 4, -80, 4" Style="{ThemeResource GlowSwitch}" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Padding="12, 8, 12, 4" Background="{ThemeResource LayerFillColorDefaultBrush}" Margin="4, 8, 12, 8" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">
+                                            <StackPanel HorizontalAlignment="Left">
+                                                <TextBlock Text="Show in Tray" MaxWidth="220" FontWeight="SemiBold" Margin="0, 0, 0, 4"/>
+                                                <TextBlock Text="Launch this app from the Tray" MaxWidth="220" Opacity="0.7" />
+                                            </StackPanel>
+                                            <ToggleSwitch IsOn="{x:Bind Settings.Tray, Mode=TwoWay}" Margin="4, 4, -80, 4" Style="{ThemeResource GlowSwitch}" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Padding="12, 8, 12, 4" Background="{ThemeResource LayerFillColorDefaultBrush}" Margin="4, 8, 12, 8" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource MicaBorderBrush}">
+                                            <StackPanel HorizontalAlignment="Left">
+                                                <TextBlock Text="Exit after command" MaxWidth="220" FontWeight="SemiBold" Margin="0, 0, 0, 4"/>
+                                                <TextBlock Text="Close app after executing command" MaxWidth="220" Opacity="0.7" />
+                                            </StackPanel>
+                                            <ToggleSwitch IsOn="{x:Bind Settings.Exit, Mode=TwoWay}" Margin="4, 4, -80, 4" Style="{ThemeResource GlowSwitch}" HorizontalAlignment="Right"/>
                                         </Grid>
                                     </StackPanel>
                                 </StackPanel>
@@ -335,29 +356,34 @@
                                                 <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                                             </icons:FluentSymbolIcon.RenderTransform>
                                         </icons:FluentSymbolIcon>
-                                        <TextBlock Text="Preview" FontSize="32" Margin="0,0,0,12" FontWeight="SemiBold" CharacterSpacing="-20"/>
-                                        <TextBlock LineHeight="24" HorizontalAlignment="left" Margin="0, 0, 24, 0">
-                                            - Keyboard shortcut not customizable
-                                            <LineBreak/>
-                                            - Every single command may not work
-                                            <LineBreak/>
-                                            - Administrator mode not available
-                                            <LineBreak/>
-                                            ✓ Open source
-                                        </TextBlock>
-                                        <HyperlinkButton Margin="6, 0, 0, 0" Content="GitHub" NavigateUri="https://github.com/FireCubeStudios/Run"/>
+                                        <TextBlock Text="Info" FontSize="32" Margin="0,0,0,12" FontWeight="SemiBold" CharacterSpacing="-20"/>
+                                        <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4, 4, 4, 2">About this app</TextBlock>
+                                        <StackPanel Margin="4, 0, 4, 0" Orientation="Horizontal">
+                                            <TextBlock Opacity="0.7" FontSize="14" Margin="0, 0, 0, 0">2.0</TextBlock>
+                                        </StackPanel>
+                                        <TextBlock FontSize="14" Margin="4, 0, 4, 0" TextWrapping="WrapWholeWords">Developed by FireCubeStudios</TextBlock>
+                                        <HyperlinkButton Margin="4" NavigateUri="https://twitter.com/FireCubeStudios">Follow me on Twitter</HyperlinkButton>
+                                        <HyperlinkButton Margin="4" NavigateUri="https://discord.gg/3WYcKat">Join our Discord</HyperlinkButton>
+                                        <HyperlinkButton Margin="4" NavigateUri="https://github.com/FireCubeStudios/Run">GitHub repository</HyperlinkButton>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </FlipViewItem>
-                        <FlipViewItem >
-                            <StackPanel Orientation="Vertical" Margin="28,120,28,0" Width="375" HorizontalAlignment="Center">
+                        <FlipViewItem Background="{ThemeResource MicaDarkBrush}">
+                            <StackPanel Orientation="Vertical" Margin="28,120,28,0" HorizontalAlignment="Center">
                                 <FontIcon Glyph="&#xE001;" FontSize="40" Foreground="{ThemeResource ResponsiveAccentBrush1}" HorizontalAlignment="Center" Margin="0,0,0,16" />
-                                <TextBlock Text="Choose a Theme!" FontSize="32" Margin="0,0,0,12" FontWeight="SemiBold" CharacterSpacing="-20" HorizontalAlignment="Center"/>
-                                <muxc:RadioButtons x:Name="Theme" SelectedIndex="0">
-                                    <RadioButton Content="Classic"/>
-                                    <RadioButton Content="Compact"/>
-                                </muxc:RadioButtons>
+                                <TextBlock Text="Enable AI processing!" FontSize="32" Margin="0,0,0,12" FontWeight="SemiBold" CharacterSpacing="-20" HorizontalAlignment="Center"/>
+                                <StackPanel Spacing="12" Padding="100, 2, 24, 2">
+                                    <Lcontrols:APIBox/>
+                                    <TextBlock>
+                          Enable Run to use AI to process natural language such as "Open the settings app"
+                                        <LineBreak/>
+                          A valid API KEY with TOKENS is needed
+                                    </TextBlock>
+                                    <TextBlock Foreground="{ThemeResource RedLinearGradientBrush}">
+                          Note: This gives GPT access to execute a single cmd command.
+                                    </TextBlock>
+                                </StackPanel>
                                 <Button HorizontalAlignment="Center" Padding="16,10,16,10" Style="{StaticResource AccentButtonStyle}" BorderBrush="{ThemeResource MicaBorderBrush}" Margin="0, 40,0,0" Click="CompletedOOBE_Click">
                                     <Button.Content >
                                         <StackPanel Orientation="Horizontal">

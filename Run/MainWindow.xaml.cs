@@ -13,6 +13,7 @@ using Microsoft.UI.Input;
 using Windows.UI.Input;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using Run.Services;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -33,20 +34,20 @@ namespace Run
             Bindings.Update();
             BitmapImage b = new(new Uri("ms-appx:///Assets/Square44x44Logo.scale-100.png")); // why
             AppFontIcon.Source = b;
+            TrayService.Setup(this);
         }
 
         private void ProcessExecution(object sender, bool e)
         {
             if (e)
             {
-                Exit();
+                if(new SettingsService().Exit)
+                    Exit();
                 RunBox.Foreground = (LinearGradientBrush)App.Current.Resources["AccentLinearGradientBrush"];
             }
             else
             {
-                RunBox.Foreground = (LinearGradientBrush)App.Current.Resources["RedLinearGradientBrush"];
-                RunBox.Focus(FocusState.Pointer);
-                RunShakeAnimation.Start();
+                RunBox.Reject();
             }
         }
 
@@ -55,6 +56,8 @@ namespace Run
         private void Focus(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
 
         private void RunBox_Loaded(object sender, RoutedEventArgs e) => RunBox.Focus(FocusState.Pointer);
+
+        private void RunBox_TextSubmitted(object sender, string e) => RunViewModel.RunCommand.Execute(this);
 
         //Obsolete
         #region to remove
@@ -140,6 +143,8 @@ namespace Run
 
         #endregion
 
-        private void RunBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => RunViewModel.RunCommand.Execute(this);
+        private void RunBox_Expanded(object sender, bool e) => this.Height = 270;
+
+        private void RunBox_Collapsed(object sender, bool e) => this.Height = 180;
     }
 }

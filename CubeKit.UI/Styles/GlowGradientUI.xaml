@@ -2623,4 +2623,93 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="GlowListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="Margin" Value="4, 0, 4, 0" />
+        <Setter Property="Padding" Value="12, 4, 12, 4" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="FocusVisualPrimaryThickness" Value="0"/>
+        <Setter Property="FocusVisualSecondaryThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Grid CornerRadius="{TemplateBinding CornerRadius}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.5" To="0.95" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="0.95" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="Opacity" EnableDependentAnimation="True"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.5" To="1" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="1" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="0.8" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="Opacity" EnableDependentAnimation="True"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentControl" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.5" To="0.95" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="0.95" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="0.4" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="Opacity" EnableDependentAnimation="True"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentControl" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.5" To="1" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="1" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" EnableDependentAnimation="True"/>
+
+                                        <DoubleAnimation Duration="0:0:0.5" To="0.8" Storyboard.TargetName="AnimatingBorder" Storyboard.TargetProperty="Opacity" EnableDependentAnimation="True"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentControl" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentControl" Margin="3,2" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}" RenderTransformOrigin="0.5, 0.5" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}">
+                            <ContentPresenter.RenderTransform>
+                                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
+                        <Border x:Name="AnimatingBorder"
+                                    CornerRadius="{ThemeResource ControlCornerRadius}"
+                                    BorderThickness="2"
+                                    Opacity="0" Canvas.ZIndex="2"
+                                    Margin="3,2"
+                                    HorizontalAlignment="Stretch"
+                                    RenderTransformOrigin="0.5,0.5">
+                            <Border.BorderBrush>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="{ThemeResource SystemAccentColorLight1}" Offset="0"/>
+                                    <GradientStop Color="{ThemeResource SystemAccentColorLight2}" Offset="0.5"/>
+                                    <GradientStop Color="{ThemeResource SystemAccentColorLight3}" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Border.BorderBrush>
+                            <Border.RenderTransform>
+                                <ScaleTransform/>
+                            </Border.RenderTransform>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

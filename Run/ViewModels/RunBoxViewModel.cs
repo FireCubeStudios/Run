@@ -27,7 +27,7 @@ namespace Run.ViewModels
         public SettingsService Settings = App.Current.Services.GetService<SettingsService>();
 
         [RelayCommand]
-        private async void Run()
+        private async Task Run()
         {
             if (String.IsNullOrEmpty(commandText))
             {
@@ -44,7 +44,7 @@ namespace Run.ViewModels
         }
 
         [RelayCommand]
-        private async void RunAdmin()
+        private async Task RunAdmin()
         {
             if (String.IsNullOrEmpty(commandText))
             {

@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
+using Run.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,11 @@ namespace Run.Controls
 {
     public sealed partial class RunBox : UserControl
     {
+        public new event EventHandler<string> TextSubmitted;
+
+        public new event EventHandler<bool> Expanded;
+        public new event EventHandler<bool> Collapsed;
+
         public string Text
         {
             get => (string)GetValue(TextProperty);
@@ -31,6 +37,15 @@ namespace Run.Controls
 
         public static readonly DependencyProperty TextProperty =
                    DependencyProperty.Register("Text", typeof(string), typeof(RunBox), null);
+
+        public RunBoxViewModel RunViewModel
+        {
+            get => (RunBoxViewModel)GetValue(RunViewModelProperty);
+            set => SetValue(RunViewModelProperty, value);
+        }
+
+        public static readonly DependencyProperty RunViewModelProperty =
+                   DependencyProperty.Register("RunViewModel", typeof(string), typeof(RunBox), null);
 
         public RunBox()
         {
@@ -43,8 +58,20 @@ namespace Run.Controls
             {
                 if (string.IsNullOrEmpty(Run.Text))
                      Reject();
+                else
+                {
+                    if (TextSubmitted is not null)
+                        TextSubmitted(this, Run.Text);
+                }
             }
-
+            else if(e.Key == VirtualKey.Down)
+            {
+                RecentsList.SelectedIndex = RecentsList.SelectedIndex != 29 ? RecentsList.SelectedIndex + 1 : 0;
+            }
+            else if (e.Key == VirtualKey.Up)
+            {
+                RecentsList.SelectedIndex = RecentsList.SelectedIndex != 0 ? RecentsList.SelectedIndex - 1 : RecentsList.SelectedIndex;
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) => Run.Text = "";
@@ -77,5 +104,21 @@ namespace Run.Controls
             if(Run.Foreground != RedLinearGradientBrush) // Don't switch if red
                 Run.Foreground = AccentLinearGradientBrush;
         }
+
+        private void ChevronButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Expanded is not null)
+                Expanded(this, true);
+            RecentsList.Visibility = Visibility.Visible;
+        }
+
+        private void ChevronButton_UnChecked(object sender, RoutedEventArgs e)
+        {
+            if (Collapsed is not null)
+                Collapsed(this, true);
+            RecentsList.Visibility = Visibility.Collapsed;
+        }
+
+        private void RecentsList_SelectionChanged(object sender, SelectionChangedEventArgs e) => Run.Text = e.AddedItems[0].ToString();
     }
 }

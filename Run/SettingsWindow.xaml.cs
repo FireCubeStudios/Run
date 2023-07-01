@@ -54,7 +54,7 @@ namespace Run
 
         private async void Hub_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("https://discord.gg/3WYcKat"));
 
-        private async void GitHub_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("https://github.com/FireCube/Run"));
+        private async void GitHub_Click(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("https://github.com/FireCubeStudios/Run"));
 
 
         private void Exit_Click(object sender, RoutedEventArgs e) => Application.Current.Exit();
