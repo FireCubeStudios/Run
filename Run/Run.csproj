@@ -23,7 +23,7 @@
     <SupportedOSPlatformVersion>10.0.18362.0</SupportedOSPlatformVersion>
     <DefaultLanguage>en</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>00E95C3FAD42BD7746B10B1BEFB33D44991CE752</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>C7790A85B09720146C166F1CA624FF2561F3D776</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
   </PropertyGroup>
   <ItemGroup>
