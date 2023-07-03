@@ -10,10 +10,10 @@
   <Identity
     Name="2505FireCubeStudios.RunbyFireCubeNotbymicrosoft"
     Publisher="CN=3C7C8FC9-7104-4B33-8730-EE1E929D5D3B"
-    Version="2.0.21.0" />
+    Version="2.0.27.0" />
   
   <Properties>
-    <DisplayName>Run</DisplayName>
+    <DisplayName>Run by FireCube (Not by Microsoft)</DisplayName>
     <PublisherDisplayName>FireCubeStudios</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

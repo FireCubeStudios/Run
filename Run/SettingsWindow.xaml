@@ -87,7 +87,7 @@
                         </settings:SettingsBlockControl.Icon>
                         <ToggleSwitch IsOn="{x:Bind Settings.KeyboardEnabled, Mode=TwoWay}" Style="{ThemeResource GlowSwitch}" OnContent="Win + R" HorizontalAlignment="Right" OffContent="Off"/>
                     </settings:SettingsBlockControl>
-                    <settings:SettingsBlockControl Title="Show Clippy in Tray" Margin="2" Description="Summon Clippy from the System Tray area">
+                    <settings:SettingsBlockControl Title="Show Run in Tray" Margin="2" Description="Summon Run from the System Tray area">
                         <settings:SettingsBlockControl.Icon>
                             <icons:FluentIconElement VerticalAlignment="Center" Symbol="Apps24"/>
                         </settings:SettingsBlockControl.Icon>
