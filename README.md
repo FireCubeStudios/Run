@@ -7,5 +7,5 @@ Discord: https://discord.com/invite/3WYcKat
 - https://github.com/FireCubeStudios/Run/releases/tag/v2.0
 
 <p align="center">
-  <img align="center" src="https://media.discordapp.net/attachments/1015680332114169877/1029410440951898182/unknown.png">
+  <img align="center" src="https://media.discordapp.net/attachments/753345992543305808/1125442489805967430/New.png">
   </p>
