@@ -62,10 +62,14 @@ namespace Run.Controls
                 {
                     new KeyService().SetKey(KeyBox.Password);
                     SettingsService.HasKey = true;
+                    ErrorBlock.Text = "";
                     Accept();
                 }
                 else
+                {
+                    ErrorBlock.Text = completionResult.Error.Message;
                     Reject();
+                }
                 Ring.Visibility = Visibility.Collapsed;
             }
             catch

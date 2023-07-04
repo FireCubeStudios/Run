@@ -16,16 +16,23 @@ namespace Run.Services
 
         public HistoryService()
         {
-            if(SystemInformation.Instance.IsFirstRun)
+            try
             {
-                AddItem("winver"); // Example command
-            }
-            else
-            {
-                foreach (string command in (string[])Settings.Values["History"])
+                if (SystemInformation.Instance.IsFirstRun)
                 {
-                    History.Add(command);
+                    AddItem("winver"); // Example command
                 }
+                else
+                {
+                    foreach (string command in (string[])Settings.Values["History"])
+                    {
+                        History.Add(command);
+                    }
+                }
+            }
+            catch
+            {
+
             }
         }
 

@@ -74,6 +74,7 @@ namespace Run
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             SettingsService Settings = App.Current.Services.GetService<SettingsService>();
+            m_window = new MainWindow();
             if (SystemInformation.Instance.IsFirstRun)
             {
                 o_window = new OOBEWindow();
